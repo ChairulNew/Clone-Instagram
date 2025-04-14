@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../main/main.dart'; // ganti dengan halaman tujuan kamu
+import '../lib/main.dart'; // ganti dengan halaman tujuan kamu
 import './AfterSplash.dart';
 
 class SplashScreen extends StatefulWidget {

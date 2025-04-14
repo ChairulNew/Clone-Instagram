@@ -3,16 +3,13 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(), // Splash screen pertama kali muncul
-    ),
+    const MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()),
   );
 }
 
-// --------------------------
+// ---------------------------
 // SPLASH SCREEN
-// --------------------------
+// ---------------------------
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -24,7 +21,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Navigasi ke halaman utama setelah 2 detik
     Timer(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
@@ -51,11 +47,17 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-// --------------------------
+// ---------------------------
 // MAIN APP
-// --------------------------
-class MyApp extends StatelessWidget {
+// ---------------------------
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
 
   final List<Map<String, String>> stories = const [
     {'name': 'chairulll.__', 'image': 'assets/chairul.jpg'},
@@ -82,7 +84,7 @@ class MyApp extends StatelessWidget {
       'username': 'chairulll.__',
       'profileImage': 'assets/chairul.jpg',
       'postImage':
-          'https://cdn-images-1.medium.com/max/918/1*rb3JJRN2YfybijTcxQiiUQ.png',
+          'https://miro.medium.com/v2/resize:fit:611/1*sQ3zLwfTFZZaHjkw3-4ITA.png',
       'caption': 'Halo, aku lagi mau sharing tentang pembelajaran flutter',
     },
     {
@@ -96,10 +98,24 @@ class MyApp extends StatelessWidget {
       'username': 'Ngabbrull',
       'profileImage': 'https://via.placeholder.com/150/0000FF/FFFFFF?text=C',
       'postImage':
-          'https://static.thehoneycombers.com/wp-content/uploads/sites/4/2019/05/Bingin-Beach-Uluwatu-Bali-Indonesia.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Pemandangan_Gunung_Kerinci_01.jpg/2560px-Pemandangan_Gunung_Kerinci_01.jpg',
       'caption': 'Santai dulu bro 🔥',
     },
   ];
+
+  void _onItemTapped(int index) {
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const SearchPage()),
+      );
+    } else if (index == 2) {
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,12 +232,18 @@ class MyApp extends StatelessWidget {
 
         // Bottom Navigation Bar
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
+          currentIndex: _selectedIndex,
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.grey,
+          type: BottomNavigationBarType.fixed,
+          onTap: _onItemTapped,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_circle_outline),
+              label: 'Post',
+            ),
             BottomNavigationBarItem(
               icon: Icon(Icons.video_library),
               label: 'Reels',
@@ -232,6 +254,35 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ---------------------------
+// Search Page
+// ---------------------------
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Cari Postingan")),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: 15,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
+        ),
+        itemBuilder: (context, index) {
+          return Image.network(
+            'https://picsum.photos/id/${index + 50}/200/200',
+            fit: BoxFit.cover,
+          );
+        },
       ),
     );
   }
