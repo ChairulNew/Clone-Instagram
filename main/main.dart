@@ -10,11 +10,19 @@ class MyApp extends StatelessWidget {
   final List<Map<String, String>> stories = const [
     {'name': 'chairulll.__', 'image': 'assets/chairul.jpg'},
     {
-      'name': 'arul',
+      'name': 'BullBull',
       'image': 'https://via.placeholder.com/150/00FF00/FFFFFF?text=B',
     },
     {
-      'name': 'Ngabbrull',
+      'name': 'ngabbrull',
+      'image': 'https://via.placeholder.com/150/0000FF/FFFFFF?text=C',
+    },
+    {
+      'name': 'afqa01',
+      'image': 'https://via.placeholder.com/150/0000FF/FFFFFF?text=C',
+    },
+    {
+      'name': 'chairumi',
       'image': 'https://via.placeholder.com/150/0000FF/FFFFFF?text=C',
     },
   ];
@@ -25,7 +33,7 @@ class MyApp extends StatelessWidget {
       'profileImage': 'assets/chairul.jpg',
       'postImage':
           'https://cdn-images-1.medium.com/max/918/1*rb3JJRN2YfybijTcxQiiUQ.png',
-      'caption': 'Mencoba belajar Flutter nih! 🚀',
+      'caption': 'Halo, aku lagi mau sharing tentang pembelajaran flutter',
     },
     {
       'username': 'arul',
